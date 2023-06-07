@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BiodataController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AutoCompletedController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,12 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/negara', [AutoCompletedController::class, 'funcnegara']);
+Route::get('/barang', [AutoCompletedController::class, 'funcbarang']);
+
+Route::get('/autocomplete-view', function () {
+    return view('autocompleted');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/biodata', [BiodataController::class, 'create'])->name('biodata.create');
