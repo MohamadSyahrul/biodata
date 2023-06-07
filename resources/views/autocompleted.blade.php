@@ -60,8 +60,14 @@
                                     ur_pelabuhan: request.term
                                 },
                                 success: function(data) {
-                                    response(data.data);
-                                    console.log(data.data);
+                                    var pelabuhanData = [];
+                                    if (data.data) {
+                                        data.data.forEach(function(item) {
+                                            pelabuhanData.push(item
+                                                .kd_pelabuhan);
+                                        });
+                                    }
+                                    response(pelabuhanData);
 
                                 }
                             });
@@ -76,27 +82,6 @@
                 }
             });
 
-            // $("#pelabuhanid").autocomplete({
-            //     source: function(request, response) {
-            //         var kd_negara = $('#pelabuhanid').data('kd-negara');
-            //         $.ajax({
-            //             url: "/pelabuhan",
-            //             dataType: "json",
-            //             data: {
-            //                 kd_negara: kd_negara,
-            //                 keyword: request.term
-            //             },
-            //             success: function(data) {
-            //                 response(data);
-            //             }
-            //         });
-            //     },
-            //     minLength: 2,
-            //     select: function(event, ui) {
-            //         var label = ui.item.label;
-            //         var value = ui.item.value;
-            //     }
-            // });
 
             $("#barangid").autocomplete({
                     source: function(request, response) {
