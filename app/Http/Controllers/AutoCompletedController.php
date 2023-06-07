@@ -10,8 +10,6 @@ class AutoCompletedController extends Controller
     public function funcnegara(Request $request)
     {
         $query = $request->input('query');
-        // $query = 'ind';
-
 
         $response = Http::get('https://insw-dev.ilcs.co.id/n/negara', [
             'ur_negara' => $query
@@ -31,6 +29,36 @@ class AutoCompletedController extends Controller
 
         return response()->json($result);
     }
+
+ 
+    // public function funcpelabuhan(Request $request)
+    // {
+    //     // $keyword = 'Pa';
+    //     $keyword  = $request->input('keyword');
+
+    //     // Ambil kd_negara dari fungsi funcnegara
+    //     $responseNegara = $this->funcnegara($request->input('query'));
+    //     $kd_negara = $responseNegara['value'];
+
+    //     $response = Http::get('https://insw-dev.ilcs.co.id/n/pelabuhan', [
+    //         'kd_negara' => $kd_negara,
+    //         'ur_pelabuhan' => $keyword
+    //     ]);
+
+    //     $data  = $response->json();
+        
+    //     $result = [];
+    //     if (isset($data['data'])) {
+    //         foreach ($data['data'] as $r) {
+    //             $result[] = [
+    //                 'label' => $r['ur_pelabuhan'],
+    //                 'value' => $r['kd_pelabuhan']
+    //             ];
+    //         }
+    //     }
+
+    //     return response()->json($result);
+    // }
 
     public function funcbarang(Request $request)
     {
@@ -57,5 +85,6 @@ class AutoCompletedController extends Controller
 
         return response()->json($result);
     }
+
     
 }

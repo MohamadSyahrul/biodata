@@ -15,6 +15,11 @@
     </div>
     <br>
     <div>
+        <label for="pelabuhanid">Pelabuhan:</label>
+        <input id="pelabuhanid" type="text" name="pelabuhanid">
+    </div>
+    <br>
+    <div>
         <label for="barangid">HS Code:</label>
         <input id="barangid" type="text" name="barangid">
     </div>
@@ -35,12 +40,63 @@
                         },
                         success: function(data) {
                             response(data);
+                            // console.log(data);
 
                         }
                     });
                 },
-                minLength: 2 // Minimal panjang input sebelum autocompletion dimulai
+                minLength: 2,
+                select: function(event, ui) {
+                    var kd_negara = ui.item.value;
+                    // console.log(kd_negara);
+
+                    $("#pelabuhanid").autocomplete({
+                        source: function(request, response) {
+                            $.ajax({
+                                url: "https://insw-dev.ilcs.co.id/n/pelabuhan",
+                                dataType: "json",
+                                data: {
+                                    kd_negara: kd_negara,
+                                    ur_pelabuhan: request.term
+                                },
+                                success: function(data) {
+                                    response(data.data);
+                                    console.log(data.data);
+
+                                }
+                            });
+                        },
+                        minLength: 2,
+                        select: function(event, ui) {
+                            var label = ui.item.label;
+                            var value = ui.item.value;
+                        }
+                    });
+
+                }
             });
+
+            // $("#pelabuhanid").autocomplete({
+            //     source: function(request, response) {
+            //         var kd_negara = $('#pelabuhanid').data('kd-negara');
+            //         $.ajax({
+            //             url: "/pelabuhan",
+            //             dataType: "json",
+            //             data: {
+            //                 kd_negara: kd_negara,
+            //                 keyword: request.term
+            //             },
+            //             success: function(data) {
+            //                 response(data);
+            //             }
+            //         });
+            //     },
+            //     minLength: 2,
+            //     select: function(event, ui) {
+            //         var label = ui.item.label;
+            //         var value = ui.item.value;
+            //     }
+            // });
 
             $("#barangid").autocomplete({
                     source: function(request, response) {

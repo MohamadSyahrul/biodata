@@ -27,6 +27,7 @@ Route::get('/dashboard', function () {
 
 Route::get('/negara', [AutoCompletedController::class, 'funcnegara']);
 Route::get('/barang', [AutoCompletedController::class, 'funcbarang']);
+// Route::get('/pelabuhan', [AutoCompletedController::class, 'funcpelabuhan']);
 
 Route::get('/autocomplete-view', function () {
     return view('autocompleted');
